@@ -2,7 +2,9 @@ package ru.testTank.display;
 
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import javax.swing.JFrame;
 
 
@@ -17,18 +19,33 @@ public class Display {
         
         window = new JFrame(title);         /*тначе создаем окно с именем window*/
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        content = new Canvas();             /*создаем поле с именем content*/
+        content = new Canvas(){
+            @Override
+            public void paint(Graphics g){                      /*переопределяем метод из класса Canvas*/
+                super.paint(g);                                 /*запускаем функцию из самого метода paint класса Canvas*/
+                render(g);
+            }
+        };             /*создаем поле с именем content*/
         
         Dimension size = new Dimension(width, hight);           /*создаем объект для указания размеров поля*/   
         content.setPreferredSize(size);                         /*функция применяющая размеры к полю контент*/
+        content.setBackground(Color.black);
         
         window.setResizable(false);                             /*запрещаем изменение размера окна*/
         window.getContentPane().add(content);                   /*помещаем контент в окно и задаем контент по размеру окна*/
         window.pack();  
         window.setLocationRelativeTo(null);
         window.setVisible(true);                                /*делаем окно видимым*/
-        
-        System.out.println("bla bla bla");
-        
+              
     }
-}
+    
+    public static void render(){
+        content.repaint();
+    }
+    
+    private static void render(Graphics g){
+        g.setColor(Color.yellow);
+        g.fillOval(400 - 50, 300 -50, 100, 100);
+    }
+    }
+
