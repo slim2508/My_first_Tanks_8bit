@@ -28,7 +28,7 @@ public class Display {
         window.setLocationRelativeTo(null);
         window.setVisible(true);                                /*делаем окно видимым*/
         
-        
+        System.out.println("bla bla bla");
         
     }
 }
